@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/AvianFlu/ncp"
-
-    >ncp (v2.0.0)</a>
+    <a href="https://github.com/AvianFlu/ncp">ncp (v2.0.0)</a>
 </h1>
 <h4>Asynchronous recursive file copy utility.</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.ncp">module ncp</a><ol>
 
@@ -121,7 +114,7 @@
       running = 0,
       limit = options.limit || ncp.limit || 16;
 
-  limit = (limit &#x3c; 1) ? 1 : (limit &#x3e; 512) ? 512 : limit;
+  limit = (limit &lt; 1) ? 1 : (limit &gt; 512) ? 512 : limit;
 
   startCopy(currentPath);
 
@@ -133,7 +126,7 @@
           return cb(true);
         }
       }
-      else if (typeof filter === &#x27;function&#x27;) {
+      else if (typeof filter === 'function') {
         if (!filter(source)) {
           return cb(true);
         }
@@ -144,7 +137,7 @@
 
   function getStats(source) {
     var stat = dereference ? fs.stat : fs.lstat;
-    if (running &#x3e;= limit) {
+    if (running &gt;= limit) {
       return setImmediate(function () {
         getStats(source);
       });
@@ -169,7 +162,7 @@
         return onFile(item);
       }
       else if (stats.isSymbolicLink()) {
-        // Symlinks don&#x27;t really need to know about the mode.
+        // Symlinks don't really need to know about the mode.
         return onLink(source);
       }
     });
@@ -193,7 +186,7 @@
         var stat = dereference ? fs.stat : fs.lstat;
         stat(target, function(err, stats) {
             //if souce modified time greater to target modified time copy file
-            if (file.mtime.getTime()&#x3e;stats.mtime.getTime())
+            if (file.mtime.getTime()&gt;stats.mtime.getTime())
                 copyFile(file, target);
             else return cb();
         });
@@ -208,17 +201,17 @@
     var readStream = fs.createReadStream(file.name),
         writeStream = fs.createWriteStream(target, { mode: file.mode });
 
-    readStream.on(&#x27;error&#x27;, onError);
-    writeStream.on(&#x27;error&#x27;, onError);
+    readStream.on('error', onError);
+    writeStream.on('error', onError);
 
     if(transform) {
       transform(readStream, writeStream, file);
     } else {
-      writeStream.on(&#x27;open&#x27;, function() {
+      writeStream.on('open', function() {
         readStream.pipe(writeStream);
       });
     }
-    writeStream.once(&#x27;finish&#x27;, function() {
+    writeStream.once('finish', function() {
         if (modified) {
             //target file modified date sync.
             fs.utimesSync(target, file.atime, file.mtime);
@@ -305,7 +298,7 @@
       running = 0,
       limit = options.limit || ncp.limit || 16;
 
-  limit = (limit &#x3c; 1) ? 1 : (limit &#x3e; 512) ? 512 : limit;
+  limit = (limit &lt; 1) ? 1 : (limit &gt; 512) ? 512 : limit;
 
   startCopy(currentPath);
 
@@ -317,7 +310,7 @@
           return cb(true);
         }
       }
-      else if (typeof filter === &#x27;function&#x27;) {
+      else if (typeof filter === 'function') {
         if (!filter(source)) {
           return cb(true);
         }
@@ -328,7 +321,7 @@
 
   function getStats(source) {
     var stat = dereference ? fs.stat : fs.lstat;
-    if (running &#x3e;= limit) {
+    if (running &gt;= limit) {
       return setImmediate(function () {
         getStats(source);
       });
@@ -353,7 +346,7 @@
         return onFile(item);
       }
       else if (stats.isSymbolicLink()) {
-        // Symlinks don&#x27;t really need to know about the mode.
+        // Symlinks don't really need to know about the mode.
         return onLink(source);
       }
     });
@@ -377,7 +370,7 @@
         var stat = dereference ? fs.stat : fs.lstat;
         stat(target, function(err, stats) {
             //if souce modified time greater to target modified time copy file
-            if (file.mtime.getTime()&#x3e;stats.mtime.getTime())
+            if (file.mtime.getTime()&gt;stats.mtime.getTime())
                 copyFile(file, target);
             else return cb();
         });
@@ -392,17 +385,17 @@
     var readStream = fs.createReadStream(file.name),
         writeStream = fs.createWriteStream(target, { mode: file.mode });
 
-    readStream.on(&#x27;error&#x27;, onError);
-    writeStream.on(&#x27;error&#x27;, onError);
+    readStream.on('error', onError);
+    writeStream.on('error', onError);
 
     if(transform) {
       transform(readStream, writeStream, file);
     } else {
-      writeStream.on(&#x27;open&#x27;, function() {
+      writeStream.on('open', function() {
         readStream.pipe(writeStream);
       });
     }
-    writeStream.once(&#x27;finish&#x27;, function() {
+    writeStream.once('finish', function() {
         if (modified) {
             //target file modified date sync.
             fs.utimesSync(target, file.atime, file.mtime);
@@ -461,3 +454,4 @@
     ]
 </div>
 </div>
+</body></html>
